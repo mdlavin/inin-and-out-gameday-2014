@@ -17,4 +17,5 @@ aws autoscaling create-launch-configuration --launch-configuration-name $LAUNCH_
 
 aws autoscaling create-auto-scaling-group --auto-scaling-group-name $ASG_NAME --min-size 1 --max-size 4 --launch-configuration-name $LAUNCH_NAME --vpc-zone-identifier $SUBNET_ID
 
-aws autoscaling put-scaling-policy --auto-scaling-group-name $ASG_NAME --policy-name ScaleOut --scaling-adjustment 1 --adjustment-type ChangeInCapacity
+aws autoscaling put-scaling-policy --auto-scaling-group-name $ASG_NAME --policy-name ScaleOut --scaling-adjustment 2 --adjustment-type ChangeInCapacity
+aws autoscaling put-scaling-policy --auto-scaling-group-name $ASG_NAME --policy-name ScaleIn --scaling-adjustment -1 --adjustment-type ChangeInCapacity
