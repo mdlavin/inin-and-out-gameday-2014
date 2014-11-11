@@ -8,3 +8,5 @@ echo "Created subnet $SUBNET_ID"
 
 ./launch-nat.sh $VPC_ID $SUBNET_ID
 ./create-master-ec2-instance.sh $VPC_ID $SUBNET_ID
+./create-sqs-queues.sh
+./create-s3-bucket.sh
