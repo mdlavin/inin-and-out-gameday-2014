@@ -2,16 +2,16 @@
 
 VPC_ID=$1
 
-# hvm-ssd/ubuntu-utopic-amd64-server-20141110
-SNAPSHOT_ID=snap-4b21bccd
+# Amazon Linux AMI 2014.09.1 (HVM) - ami-4985b048
+AMI_ID=ami-e74b60e6
+# amzn-ami-hvm-2014.09.1.x86_64 snap-025e7c85
+SNAPSHOT_ID=snap-025e7c85
 
-#Create EC2 Instance
-aws ec2 run-instances ami-4985b048 --instance-type t2.micro $VPC_ID --subnet subnet_id --iam-profile BatchProcessing --user-data-file batch-processing-user-data.sh
-
-# Attach EBS volume
-aws ec2 create-volume --snapshot $SNAPSHOT_ID --type gp2
+# Create EC2 Instance
+aws ec2 run-instances --image-id $AMI_ID --count 1 --instance-type t2.micro --iam-profile BatchProcessing --user-data batch-processing-user-data.sh --block-device-mappings "[{\"DeviceName\":\"/dev/xvda\",\"Ebs\":{\"DeleteOnTermination\":true,\"SnapshotId\":\"$SNAPSHOT_ID\",\"VolumeSize\":100,\"VolumeType\":\"standard\"}}]"
 
 # Tag Instance
+# aws ec2 create-tags --resources i-xxxxxxxx Master --tag "name=Master"
 
 # Configure Security Group
 
