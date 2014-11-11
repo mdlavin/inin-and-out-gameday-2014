@@ -3,7 +3,7 @@
 # First arg is security group id
 SG=$1
 # Second arg is AMI id
-AMI=$2
+AMI=ami-e72f17e6
 # Third arg is VPC id (e.g. subnet-k1345k5)
 VPC=$3
 
