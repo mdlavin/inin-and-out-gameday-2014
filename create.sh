@@ -7,3 +7,4 @@ SUBNET_ID=`aws ec2 create-subnet --availability-zone ap-northeast-1c --vpc-id $V
 echo "Created subnet $SUBNET_ID"
 
 ./launch-nat.sh $VPC_ID $SUBNET_ID
+./create-master-ec2-instance.sh $VPC_ID $SUBNET_ID
