@@ -1,6 +1,7 @@
 #!/bin/bash
 
 VPC_ID=$1
+SUBNET_ID=$2
 
 GROUP_NAME='NAT Security Group'
 
@@ -22,8 +23,6 @@ aws ec2 authorize-security-group-ingress --group-id  "$GROUP_ID" --protocol tcp 
 
 # Create inbound SSH
 aws ec2 authorize-security-group-ingress --group-id "$GROUP_ID" --protocol tcp --port 22 --cidr 0.0.0.0/0
-
-SUBNET_ID=`aws ec2 create-subnet --availability-zone ap-northeast-1c --vpc-id $VPC_ID --cidr-block 10.0.1.0/24 | grep 'SubnetId' | grep -o 'subnet-[a-z0-9]*'`
 
 echo 'Creating NAT instance'
 aws ec2 run-instances --key-name gameday --instance-type m1.small --placement AvailabilityZone=ap-northeast-1c --image-id ami-11d6e610 --subnet-id $SUBNET_ID --security-group-ids $GROUP_ID
