@@ -14,5 +14,4 @@ aws autoscaling create-launch-configuration --launch-configuration-name Workers 
 
 aws autoscaling create-auto-scaling-group --auto-scaling-group-name worker-group --min-size 1 --max-size 4 --launch-configuration-name Workers --vpc-zone-identifier $VPC
 
-aws autoscaling put-scaling-policy --auto-scaling-group-name worker-group --policy-name ScaleIn --scaling-adjustment -1 --adjustment-type ChangeInCapacity
 aws autoscaling put-scaling-policy --auto-scaling-group-name worker-group --policy-name ScaleOut --scaling-adjustment 1 --adjustment-type ChangeInCapacity
