@@ -23,8 +23,10 @@ AMI_ID=ami-4985b048
 # amzn-ami-hvm-2014.09.1.x86_64 snap-025e7c85
 SNAPSHOT_ID=snap-025e7c85
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Create EC2 Instance
-aws ec2 run-instances --subnet-id $SUBNET_ID --security-group-ids $GROUP_ID --image-id $AMI_ID --count 1 --instance-type t2.micro --iam-instance-profile Name=BatchProcessing --key-name gameday --user-data batch-processing-user-data.sh --block-device-mappings "[{\"DeviceName\":\"/dev/xvda\",\"Ebs\":{\"DeleteOnTermination\":true,\"SnapshotId\":\"$SNAPSHOT_ID\",\"VolumeSize\":100,\"VolumeType\":\"standard\"}}]" > run-instance-out
+aws ec2 run-instances --subnet-id $SUBNET_ID --security-group-ids $GROUP_ID --image-id $AMI_ID --count 1 --instance-type t2.micro --iam-instance-profile Name=BatchProcessing --key-name gameday --user-data file://$DIR/batch-processing-user-data.sh --block-device-mappings "[{\"DeviceName\":\"/dev/xvda\",\"Ebs\":{\"DeleteOnTermination\":true,\"SnapshotId\":\"$SNAPSHOT_ID\",\"VolumeSize\":100,\"VolumeType\":\"standard\"}}]" > run-instance-out
 
 INSTANCE_ID=`cat run-instance-out | grep InstanceId | awk -F\" '{print $4}'`
 
