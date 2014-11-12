@@ -3,7 +3,8 @@
 # First arg is security group id
 SG=$1
 # Second arg is AMI id
-AMI=ami-e72f17e6
+#AMI=ami-e72f17e6
+AMI=ami-21241c20
 # Third arg is subnet id (e.g. subnet-k1345k5)
 SUBNET_ID=$2
 
